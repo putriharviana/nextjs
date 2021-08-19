@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-export default function Home() {
+export default function Home({ todos, req }) {
   return (
     <div className="container">
       <Head>
@@ -9,6 +9,12 @@ export default function Home() {
       </Head>
 
       <main>
+        <div>
+          {todos.map((item) => <p key={item.id}>{item.title} </p>)}
+        </div>
+        {/* <div>
+          {req.map((item) => <p key={item.data.id}>{item.data.first_name} </p>)}
+        </div> */}
         <h1 className="title">
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
@@ -207,3 +213,44 @@ export default function Home() {
     </div>
   )
 }
+// export async function getStaticProps() {
+//   // Call an external API endpoint to get posts.
+//   // You can use any data fetching library
+//   const res = await fetch('https://reqres.in/api/users?page=2')
+//   const posts = await res.json()
+
+//   console.log('tes', posts)
+
+//   // By returning { props: { posts } }, the Blog component
+//   // will receive `posts` as a prop at build time
+//   return {
+//     props: {
+//       posts,
+//     },
+//   }
+// }
+
+export const getStaticProps = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const todos = await res.json();
+  console.log('tes', todos)
+
+  return {
+    props: {
+      todos,
+    },
+  };
+};
+
+export const getStaticTes = async () => {
+  const res = await fetch("https://reqres.in/api/users?page=2");
+  const req = await res.json();
+  console.log('tes', req)
+
+  return {
+    props: {
+      req,
+    },
+  };
+};
+
