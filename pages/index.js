@@ -9,12 +9,12 @@ export default function Home({ todos, req }) {
       </Head>
 
       <main>
-        <div>
-          {todos.map((item) => <p key={item.id}>{item.title} </p>)}
-        </div>
         {/* <div>
-          {req.map((item) => <p key={item.data.id}>{item.data.first_name} </p>)}
+          {todos.map((item) => <p key={item.id}>{item.title} </p>)}
         </div> */}
+        <div>
+          {req.data.map((tes) => <p> {tes.first_name} </p>)}
+        </div>
         <h1 className="title">
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
@@ -230,22 +230,22 @@ export default function Home({ todos, req }) {
 //   }
 // }
 
+// export const getStaticProps = async () => {
+//   const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+//   const todos = await res.json();
+//   // console.log('tes', todos)
+
+//   return {
+//     props: {
+//       todos,
+//     },
+//   };
+// };
+
 export const getStaticProps = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
-  const todos = await res.json();
-  console.log('tes', todos)
-
-  return {
-    props: {
-      todos,
-    },
-  };
-};
-
-export const getStaticTes = async () => {
   const res = await fetch("https://reqres.in/api/users?page=2");
   const req = await res.json();
-  console.log('tes', req)
+  console.log('tes 2', req)
 
   return {
     props: {
